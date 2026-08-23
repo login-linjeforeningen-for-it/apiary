@@ -8,7 +8,7 @@ spec:
   goTemplateOptions: ["missingkey=error"]
   generators:
     - git:
-        repoURL: git@github.com:login-linjeforeningen-for-it/apiary.git
+        repoURL: https://github.com/login-linjeforeningen-for-it/apiary.git
         revision: main
         directories:
           - path: services/*
@@ -18,7 +18,7 @@ spec:
     spec:
       project: default
       source:
-        repoURL: git@github.com:login-linjeforeningen-for-it/apiary.git
+        repoURL: https://github.com/login-linjeforeningen-for-it/apiary.git
         targetRevision: main
         path: '{{.path.path}}'
       destination:

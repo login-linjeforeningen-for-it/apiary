@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: git@github.com:login-linjeforeningen-for-it/apiary.git
+    repoURL: https://github.com/login-linjeforeningen-for-it/apiary.git
     targetRevision: main
     path: infra/argocd
   destination:
