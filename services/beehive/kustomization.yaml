@@ -1,0 +1,24 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - deployment.yaml
+  - service.yaml
+  - externalsecret.yaml
+
+commonLabels:
+  app.kubernetes.io/part-of: login
+
+configMapGenerator:
+  - name: beehive-env
+    literals:
+      - BEEKEEPER_API_URL=https://beekeeper.login.no/api
+      - NEXT_PUBLIC_BEEKEEPER_WSS_URL=wss://beekeeper.login.no/api
+      - NEXT_PUBLIC_API_URL=https://workerbee.login.no/api/v2
+      - AUTHENTIK_URL=https://authentik.login.no
+      - NEXT_PUBLIC_CDN_URL=https://s3.login.no/beehive
+      - NEXT_PUBLIC_ALBUM_CDN_URL=https://s3.login.no/beehive
+
+images:
+  - name: ghcr.io/login-linjeforeningen-for-it/beehive
+    newTag: sha-81a59d1
