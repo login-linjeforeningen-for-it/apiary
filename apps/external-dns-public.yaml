@@ -1,0 +1,62 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: external-dns-public
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://kubernetes-sigs.github.io/external-dns
+    chart: external-dns
+    targetRevision: 1.21.1
+    helm:
+      releaseName: external-dns-public
+      valuesObject:
+        sources:
+          - ingress
+        policy: sync
+        registry: txt
+        txtOwnerId: apiary-public
+        txtPrefix: edns-public-
+        domainFilters:
+          - login.no
+        extraArgs:
+          - --ingress-class=public
+          - --default-targets=128.39.142.138
+          - --force-default-targets
+        resources:
+          requests:
+            cpu: 15m
+            memory: 64Mi
+          limits:
+            memory: 128Mi
+        provider:
+          name: webhook
+          webhook:
+            image:
+              repository: ghcr.io/amoniacou/external-dns-digitalocean-webhook
+              tag: 1.0.2@sha256:bb5b8e2a9b432cd5ec85a336f13598493ccf7860146efee6e13f0e6be33efac0
+            env:
+              - name: DO_TOKEN
+                valueFrom:
+                  secretKeyRef:
+                    name: digitalocean-dns
+                    key: token
+              - name: DO_DOMAIN_FILTER
+                value: login.no
+            resources:
+              requests:
+                cpu: 15m
+                memory: 64Mi
+              limits:
+                memory: 128Mi
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: external-dns
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: true
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true
