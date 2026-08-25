@@ -1,0 +1,9 @@
+apiVersion: metallb.io/v1beta1
+kind: IPAddressPool
+metadata:
+  name: apiary
+  namespace: metallb-system
+spec:
+  addresses:
+    - 10.30.0.40-10.30.0.49
+  autoAssign: false
