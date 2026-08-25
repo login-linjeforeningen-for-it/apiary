@@ -25,6 +25,8 @@ spec:
         service:
           annotations:
             metallb.io/loadBalancerIPs: 10.30.0.41
+          spec:
+            externalTrafficPolicy: Local
         ports:
           web:
             expose:
