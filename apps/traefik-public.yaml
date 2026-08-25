@@ -1,0 +1,59 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: traefik-public
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://helm.traefik.io/traefik
+    chart: traefik
+    targetRevision: 41.3.0
+    helm:
+      releaseName: traefik-public
+      valuesObject:
+        ingressClass:
+          enabled: true
+          isDefaultClass: false
+          name: public
+        providers:
+          kubernetesCRD:
+            enabled: false
+          kubernetesIngress:
+            enabled: true
+            ingressClass: public
+        service:
+          annotations:
+            metallb.io/loadBalancerIPs: 10.30.0.40
+        ports:
+          web:
+            expose:
+              default: true
+          websecure:
+            expose:
+              default: true
+            proxyProtocol:
+              trustedIPs:
+                - 10.30.0.10/32
+            forwardedHeaders:
+              trustedIPs:
+                - 10.30.0.10/32
+        accessLog:
+          enabled: true
+          format: json
+        resources:
+          requests:
+            cpu: 50m
+            memory: 64Mi
+          limits:
+            memory: 256Mi
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: traefik
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: true
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true
