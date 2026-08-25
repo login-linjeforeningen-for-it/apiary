@@ -33,6 +33,9 @@ spec:
         provider:
           name: webhook
           webhook:
+            securityContext:
+              runAsUser: 65532
+              runAsGroup: 65532
             image:
               repository: ghcr.io/amoniacou/external-dns-digitalocean-webhook
               tag: 1.0.2@sha256:bb5b8e2a9b432cd5ec85a336f13598493ccf7860146efee6e13f0e6be33efac0
