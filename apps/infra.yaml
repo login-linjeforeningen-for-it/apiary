@@ -1,0 +1,42 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: infra
+  namespace: argocd
+spec:
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
+  generators:
+    - git:
+        repoURL: https://github.com/login-linjeforeningen-for-it/apiary.git
+        revision: main
+        directories:
+          - path: infra/*
+          - path: infra/argocd
+            exclude: true
+  template:
+    metadata:
+      name: '{{.path.basename}}-config'
+    spec:
+      project: default
+      source:
+        repoURL: https://github.com/login-linjeforeningen-for-it/apiary.git
+        targetRevision: main
+        path: '{{.path.path}}'
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: '{{.path.basename}}'
+      syncPolicy:
+        automated:
+          selfHeal: true
+          prune: true
+        syncOptions:
+          - CreateNamespace=true
+          - ServerSideApply=true
+          - SkipDryRunOnMissingResource=true
+        retry:
+          limit: 5
+          backoff:
+            duration: 30s
+            factor: 2
+            maxDuration: 5m

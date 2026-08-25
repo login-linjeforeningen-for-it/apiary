@@ -1,0 +1,74 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: traefik
+  namespace: argocd
+spec:
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
+  generators:
+    - list:
+        elements:
+          - lane: public
+            vip: 10.30.0.40
+            proxyFrom: 10.30.0.10/32
+          - lane: internal
+            vip: 10.30.0.41
+            proxyFrom: 10.10.0.21/32
+  template:
+    metadata:
+      name: 'traefik-{{.lane}}'
+    spec:
+      project: default
+      source:
+        repoURL: https://helm.traefik.io/traefik
+        chart: traefik
+        targetRevision: 41.3.0
+        helm:
+          releaseName: 'traefik-{{.lane}}'
+          valuesObject:
+            ingressClass:
+              enabled: true
+              isDefaultClass: false
+              name: '{{.lane}}'
+            providers:
+              kubernetesCRD:
+                enabled: false
+              kubernetesIngress:
+                enabled: true
+                ingressClass: '{{.lane}}'
+            service:
+              annotations:
+                metallb.io/loadBalancerIPs: '{{.vip}}'
+              spec:
+                externalTrafficPolicy: Local
+            ports:
+              web:
+                expose:
+                  default: true
+              websecure:
+                expose:
+                  default: true
+                proxyProtocol:
+                  trustedIPs: ['{{.proxyFrom}}']
+                forwardedHeaders:
+                  trustedIPs: ['{{.proxyFrom}}']
+            accessLog:
+              enabled: true
+              format: json
+            resources:
+              requests:
+                cpu: 50m
+                memory: 64Mi
+              limits:
+                memory: 256Mi
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: traefik
+      syncPolicy:
+        automated:
+          selfHeal: true
+          prune: true
+        syncOptions:
+          - CreateNamespace=true
+          - ServerSideApply=true
