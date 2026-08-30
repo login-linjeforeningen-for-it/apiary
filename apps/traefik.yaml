@@ -33,7 +33,8 @@ spec:
               name: '{{.lane}}'
             providers:
               kubernetesCRD:
-                enabled: false
+                enabled: true
+                ingressClass: '{{.lane}}'
               kubernetesIngress:
                 enabled: true
                 ingressClass: '{{.lane}}'
