@@ -1,0 +1,40 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - externalsecret.yaml
+  - pvc.yaml
+  - mariadb.yaml
+  - deployment.yaml
+  - service.yaml
+  - ingress.yaml
+
+commonLabels:
+  app.kubernetes.io/part-of: login
+
+configMapGenerator:
+  - name: bookstack-env
+    literals:
+      - APP_URL=https://docs.login.no
+      - PUID=1000
+      - PGID=1000
+      - DB_HOST=bookstack-db
+      - DB_PORT=3306
+      - DB_DATABASE=bookstack
+      - DB_USERNAME=bookstack
+      - ALLOW_ROBOTS=true
+      - AUTH_METHOD=oidc
+      - AUTH_AUTO_INITIATE=false
+      - OIDC_NAME=Authentik
+      - OIDC_ISSUER=https://authentik.login.no/application/o/bookstack/
+      - OIDC_ISSUER_DISCOVER=true
+      - OIDC_USER_TO_GROUPS=true
+      - OIDC_GROUPS_CLAIM=bookstack_groups
+      - OIDC_ADDITIONAL_SCOPES=bookstack
+      - OIDC_REMOVE_FROM_GROUPS=true
+
+images:
+  - name: lscr.io/linuxserver/bookstack
+    newTag: 26.05.4-ls281
+  - name: mariadb
+    newTag: "11.4"
