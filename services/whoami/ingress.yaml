@@ -8,10 +8,10 @@ spec:
   ingressClassName: internal
   tls:
     - hosts:
-        - k8s.login.no
+        - whoami.login.no
       secretName: whoami-tls
   rules:
-    - host: k8s.login.no
+    - host: whoami.login.no
       http:
         paths:
           - path: /
