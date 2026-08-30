@@ -36,18 +36,23 @@ spec:
               memory: 256Mi
             limits:
               memory: 1Gi
+          startupProbe:
+            httpGet:
+              path: /status
+              port: http
+            periodSeconds: 10
+            failureThreshold: 90
           readinessProbe:
             httpGet:
               path: /status
               port: http
-            initialDelaySeconds: 20
             periodSeconds: 10
           livenessProbe:
             httpGet:
               path: /status
               port: http
-            initialDelaySeconds: 120
             periodSeconds: 30
+            failureThreshold: 5
       volumes:
         - name: data
           persistentVolumeClaim:

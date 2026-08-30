@@ -35,7 +35,11 @@ spec:
           args:
             - --character-set-server=utf8mb4
             - --collation-server=utf8mb4_unicode_ci
+            - --innodb-flush-log-at-trx-commit=2
+            - --sync-binlog=0
           env:
+            - name: MARIADB_MYSQL_LOCALHOST_USER
+              value: "1"
             - name: MARIADB_ROOT_PASSWORD
               valueFrom:
                 secretKeyRef:
