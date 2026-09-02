@@ -27,51 +27,43 @@ spec:
           valuesObject:
             sources:
               - ingress
-            policy: sync
+            # upsert-only through the DO -> OVH cutover so a misconfig can't
+            # prune the zone. Switch back to `sync` once verified.
+            policy: upsert-only
             registry: txt
             txtOwnerId: 'apiary-{{.lane}}'
             txtPrefix: 'edns-{{.lane}}-'
             domainFilters:
               - login.no
+            provider:
+              name: ovh
             extraArgs:
               - '--ingress-class={{.lane}}'
               - '--default-targets={{.target}}'
               - --force-default-targets
+              - --ovh-endpoint=ovh-ca
+            env:
+              - name: OVH_APPLICATION_KEY
+                valueFrom:
+                  secretKeyRef:
+                    name: ovh-dns
+                    key: OVH_APPLICATION_KEY
+              - name: OVH_APPLICATION_SECRET
+                valueFrom:
+                  secretKeyRef:
+                    name: ovh-dns
+                    key: OVH_APPLICATION_SECRET
+              - name: OVH_CONSUMER_KEY
+                valueFrom:
+                  secretKeyRef:
+                    name: ovh-dns
+                    key: OVH_CONSUMER_KEY
             resources:
               requests:
                 cpu: 15m
                 memory: 64Mi
               limits:
                 memory: 128Mi
-            provider:
-              name: webhook
-              webhook:
-                securityContext:
-                  runAsUser: 65532
-                  runAsGroup: 65532
-                image:
-                  repository: ghcr.io/amoniacou/external-dns-digitalocean-webhook
-                  tag: 1.0.2@sha256:bb5b8e2a9b432cd5ec85a336f13598493ccf7860146efee6e13f0e6be33efac0
-                env:
-                  - name: DO_TOKEN
-                    valueFrom:
-                      secretKeyRef:
-                        name: digitalocean-dns
-                        key: token
-                  - name: DO_DOMAIN_FILTER
-                    value: login.no
-                  - name: WEBHOOK_PORT
-                    value: "8888"
-                  - name: HEALTH_PORT
-                    value: "8080"
-                  - name: HEALTH_HOST
-                    value: 0.0.0.0
-                resources:
-                  requests:
-                    cpu: 15m
-                    memory: 64Mi
-                  limits:
-                    memory: 128Mi
       destination:
         server: https://kubernetes.default.svc
         namespace: external-dns
