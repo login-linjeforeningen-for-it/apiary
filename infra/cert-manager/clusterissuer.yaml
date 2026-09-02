@@ -15,13 +15,14 @@ spec:
             solverName: ovh
             config:
               ovhEndpointName: ovh-ca
+              authenticationMethod: application
               applicationKeyRef:
                 name: ovh-credentials
                 key: applicationKey
               applicationSecretRef:
                 name: ovh-credentials
                 key: applicationSecret
-              consumerKeyRef:
+              applicationConsumerKeyRef:
                 name: ovh-credentials
                 key: consumerKey
 ---
@@ -42,12 +43,13 @@ spec:
             solverName: ovh
             config:
               ovhEndpointName: ovh-ca
+              authenticationMethod: application
               applicationKeyRef:
                 name: ovh-credentials
                 key: applicationKey
               applicationSecretRef:
                 name: ovh-credentials
                 key: applicationSecret
-              consumerKeyRef:
+              applicationConsumerKeyRef:
                 name: ovh-credentials
                 key: consumerKey
