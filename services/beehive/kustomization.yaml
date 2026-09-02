@@ -5,6 +5,7 @@ resources:
   - deployment.yaml
   - service.yaml
   - externalsecret.yaml
+  - ingress.yaml
 
 commonLabels:
   app.kubernetes.io/part-of: login

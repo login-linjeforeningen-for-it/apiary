@@ -23,14 +23,12 @@ spec:
         chart: external-dns
         targetRevision: 1.21.1
         helm:
-          releaseName: 'external-dns-{{.lane}}'
           valuesObject:
             sources:
               - ingress
             # upsert-only through the DO -> OVH cutover so a misconfig can't
             # prune the zone. Switch back to `sync` once verified.
             policy: upsert-only
-            registry: txt
             txtOwnerId: 'apiary-{{.lane}}'
             txtPrefix: 'edns-{{.lane}}-'
             domainFilters:

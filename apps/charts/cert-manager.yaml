@@ -1,23 +1,24 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: external-secrets
+  name: cert-manager
   namespace: argocd
 spec:
   project: default
   source:
-    repoURL: https://charts.external-secrets.io
-    chart: external-secrets
-    targetRevision: 2.9.0
+    repoURL: https://charts.jetstack.io
+    chart: cert-manager
+    targetRevision: v1.21.1
     helm:
       valuesObject:
-        installCRDs: true
+        crds:
+          enabled: true
         resources:
           requests:
-            cpu: 50m
-            memory: 128Mi
+            cpu: 25m
+            memory: 64Mi
           limits:
-            memory: 512Mi
+            memory: 256Mi
         webhook:
           resources:
             requests:
@@ -25,16 +26,16 @@ spec:
               memory: 64Mi
             limits:
               memory: 256Mi
-        certController:
+        cainjector:
           resources:
             requests:
               cpu: 25m
-              memory: 64Mi
+              memory: 128Mi
             limits:
-              memory: 256Mi
+              memory: 512Mi
   destination:
     server: https://kubernetes.default.svc
-    namespace: external-secrets
+    namespace: cert-manager
   syncPolicy:
     automated:
       selfHeal: true

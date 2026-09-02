@@ -10,7 +10,6 @@ spec:
     chart: cert-manager-webhook-ovh
     targetRevision: 0.9.16
     helm:
-      releaseName: cert-manager-webhook-ovh
       valuesObject:
         groupName: acme.login.no
         certManager:

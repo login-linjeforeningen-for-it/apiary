@@ -32,6 +32,18 @@ spec:
               limits:
                 memory: 1Gi
         signoz:
+          ingress:
+            enabled: true
+            className: internal
+            hosts:
+              - host: signoz.login.no
+                paths:
+                  - path: /
+                    pathType: Prefix
+                    port: 8080
+            tls:
+              - hosts:
+                  - signoz.login.no
           resources:
             requests:
               cpu: 100m

@@ -11,8 +11,6 @@ spec:
     targetRevision: 0.16.1
     helm:
       valuesObject:
-        crds:
-          enabled: true
         frrk8s:
           enabled: false
         controller:

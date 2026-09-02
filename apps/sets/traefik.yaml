@@ -25,18 +25,14 @@ spec:
         chart: traefik
         targetRevision: 41.3.0
         helm:
-          releaseName: 'traefik-{{.lane}}'
           valuesObject:
             ingressClass:
-              enabled: true
               isDefaultClass: false
               name: '{{.lane}}'
             providers:
               kubernetesCRD:
-                enabled: true
                 ingressClass: '{{.lane}}'
               kubernetesIngress:
-                enabled: true
                 ingressClass: '{{.lane}}'
             service:
               annotations:
@@ -44,12 +40,7 @@ spec:
               spec:
                 externalTrafficPolicy: Local
             ports:
-              web:
-                expose:
-                  default: true
               websecure:
-                expose:
-                  default: true
                 proxyProtocol:
                   trustedIPs: ['{{.proxyFrom}}']
                 forwardedHeaders:
