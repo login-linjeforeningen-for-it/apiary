@@ -26,9 +26,7 @@ spec:
           valuesObject:
             sources:
               - ingress
-            # upsert-only through the DO -> OVH cutover so a misconfig can't
-            # prune the zone. Switch back to `sync` once verified.
-            policy: upsert-only
+            policy: sync
             txtOwnerId: 'apiary-{{.lane}}'
             txtPrefix: 'edns-{{.lane}}-'
             domainFilters:
