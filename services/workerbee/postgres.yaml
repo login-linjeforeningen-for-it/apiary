@@ -42,7 +42,7 @@ spec:
       compression: zstd
       encryption: AES256
     data:
-      compression: zstd
+      compression: gzip
       encryption: AES256
 ---
 apiVersion: postgresql.cnpg.io/v1
