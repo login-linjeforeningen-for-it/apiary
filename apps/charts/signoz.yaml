@@ -61,9 +61,6 @@ spec:
     server: https://kubernetes.default.svc
     namespace: signoz
   syncPolicy:
-    automated:
-      selfHeal: true
-      prune: true
     syncOptions:
       - CreateNamespace=true
       - ServerSideApply=true
