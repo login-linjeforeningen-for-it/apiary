@@ -1,0 +1,72 @@
+apiVersion: external-secrets.io/v1
+kind: ExternalSecret
+metadata:
+  name: cnpg-backup
+spec:
+  secretStoreRef:
+    kind: ClusterSecretStore
+    name: 1password
+  target:
+    name: cnpg-backup-s3
+  data:
+    - secretKey: ACCESS_KEY_ID
+      remoteRef:
+        key: cnpg-backup/ACCESS_KEY_ID
+    - secretKey: SECRET_ACCESS_KEY
+      remoteRef:
+        key: cnpg-backup/SECRET_ACCESS_KEY
+    - secretKey: REGION
+      remoteRef:
+        key: cnpg-backup/REGION
+---
+apiVersion: barmancloud.cnpg.io/v1
+kind: ObjectStore
+metadata:
+  name: workerbee
+spec:
+  retentionPolicy: 30d
+  configuration:
+    destinationPath: s3://tekkom-backup
+    endpointURL: https://s3.de.io.cloud.ovh.net
+    s3Credentials:
+      accessKeyId:
+        name: cnpg-backup-s3
+        key: ACCESS_KEY_ID
+      secretAccessKey:
+        name: cnpg-backup-s3
+        key: SECRET_ACCESS_KEY
+      region:
+        name: cnpg-backup-s3
+        key: REGION
+    wal:
+      compression: zstd
+      encryption: AES256
+    data:
+      compression: zstd
+      encryption: AES256
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: workerbee-db
+spec:
+  instances: 1
+  imageName: ghcr.io/cloudnative-pg/postgresql:18
+  bootstrap:
+    initdb:
+      database: workerbee
+      owner: workerbee
+  storage:
+    size: 10Gi
+  resources:
+    requests:
+      cpu: 100m
+      memory: 256Mi
+    limits:
+      memory: 1Gi
+  plugins:
+    - name: barman-cloud.cloudnative-pg.io
+      isWALArchiver: true
+      parameters:
+        barmanObjectName: workerbee
+        serverName: workerbee

@@ -1,0 +1,28 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - externalsecret.yaml
+  - postgres.yaml
+  - deployment.yaml
+  - service.yaml
+  - ingress.yaml
+
+commonLabels:
+  app.kubernetes.io/part-of: login
+
+configMapGenerator:
+  - name: workerbee-env
+    literals:
+      - PORT=8081
+      - DB=workerbee
+      - DB_USER=workerbee
+      - DB_HOST=workerbee-db-rw
+      - DB_PORT=5432
+      - S3_URL=https://s3.login.no
+      - S3_REGION=us-east-1
+      - ALLOWED_PROTECTED_REQUESTS=25
+
+images:
+  - name: ghcr.io/login-linjeforeningen-for-it/workerbee
+    newTag: sha-27480a8
