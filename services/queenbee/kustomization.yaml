@@ -1,0 +1,27 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - externalsecret.yaml
+  - deployment.yaml
+  - service.yaml
+  - ingress.yaml
+
+commonLabels:
+  app.kubernetes.io/part-of: login
+
+configMapGenerator:
+  - name: queenbee-env
+    literals:
+      - TZ=Europe/Oslo
+      - AUTHENTIK_URL=https://authentik.login.no
+      - WORKERBEE_API_URL=https://workerbee.login.no/api/v2
+      - BEEKEEPER_API_URL=https://beekeeper.login.no/api
+      - BEEKEEPER_WSS_API_URL=wss://beekeeper.login.no/api
+      - CDN_URL=https://s3.login.no/beehive
+      - NEXT_PUBLIC_FORMS_API_URL=https://forms-api.login.no
+      - NEXT_PUBLIC_BEEKEEPER_API_URL=https://beekeeper.login.no/api
+
+images:
+  - name: ghcr.io/login-linjeforeningen-for-it/queenbee
+    newTag: sha-1c22ebf

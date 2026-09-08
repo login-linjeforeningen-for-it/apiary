@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: queenbee
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: queenbee
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: queenbee
+    spec:
+      containers:
+        - name: queenbee
+          image: ghcr.io/login-linjeforeningen-for-it/queenbee
+          ports:
+            - name: http
+              containerPort: 3000
+          envFrom:
+            - configMapRef:
+                name: queenbee-env
+            - secretRef:
+                name: queenbee-secrets
+          resources:
+            requests:
+              cpu: 100m
+              memory: 256Mi
+            limits:
+              memory: 1Gi
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          securityContext:
+            allowPrivilegeEscalation: false
+            runAsNonRoot: true
+            runAsUser: 100
+            runAsGroup: 101
+            capabilities:
+              drop: ["ALL"]
+            seccompProfile:
+              type: RuntimeDefault
