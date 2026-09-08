@@ -1,0 +1,41 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: beeformed
+spec:
+  ingressClassName: public
+  tls:
+    - hosts:
+        - forms-next.login.no
+  rules:
+    - host: forms-next.login.no
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: beeformed
+                port:
+                  number: 3000
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: beeformed-api
+spec:
+  ingressClassName: public
+  tls:
+    - hosts:
+        - forms-api-next.login.no
+  rules:
+    - host: forms-api-next.login.no
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: beeformed-api
+                port:
+                  number: 8080

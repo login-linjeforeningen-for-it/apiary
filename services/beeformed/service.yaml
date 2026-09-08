@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: beeformed
+spec:
+  selector:
+    app.kubernetes.io/name: beeformed
+  ports:
+    - port: 3000
+      targetPort: http
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: beeformed-api
+spec:
+  selector:
+    app.kubernetes.io/name: beeformed-api
+  ports:
+    - port: 8080
+      targetPort: http
