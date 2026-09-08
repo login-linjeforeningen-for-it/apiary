@@ -22,7 +22,7 @@ spec:
             - configMapRef:
                 name: queenbee-env
             - secretRef:
-                name: queenbee-secrets
+                name: queenbee
           resources:
             requests:
               cpu: 100m
