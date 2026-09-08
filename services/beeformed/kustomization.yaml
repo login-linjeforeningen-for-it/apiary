@@ -16,13 +16,18 @@ configMapGenerator:
     literals:
       - NODE_ENV=production
       - TZ=Europe/Oslo
-      - PORT=8080
       - DB=beeformed
       - DB_USER=beeformed
       - DB_HOST=beeformed-db-rw
       - DB_PORT=5432
-      - NEXT_PUBLIC_API_URL=https://forms-api.login.no
-      - AUTHENTIK_URL=https://authentik.login.no
+      - AUTH_URL=https://authentik.login.no
+      - FRONTEND_URL=https://forms-next.login.no
+      - API_URL=http://beeformed-api:8080/api
+      - NEXT_PUBLIC_API_URL=https://forms-api-next.login.no/api
+      - TRUST_PROXY=true
+      - SMTP_SECURE=true
+      - SMTP_FROM=noreply@login.no
+      - SMTP_NAME=Login
 
 images:
   - name: ghcr.io/login-linjeforeningen-for-it/beeformed/frontend
