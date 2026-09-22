@@ -1,0 +1,23 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - deployment.yaml
+  - service.yaml
+  - ingress.yaml
+
+commonLabels:
+  app.kubernetes.io/part-of: login
+
+configMapGenerator:
+  - name: beekeeper-env
+    literals:
+      - NODE_ENV=production
+      - TZ=Europe/Oslo
+      - PORT=8080
+      - LOG_LEVEL=info
+      - BASE_URL=https://authentik.login.no
+
+images:
+  - name: ghcr.io/login-linjeforeningen-for-it/beekeeper/api
+    newTag: sha-df44dae
