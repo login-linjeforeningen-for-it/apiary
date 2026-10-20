@@ -24,6 +24,11 @@ spec:
               memory: 2Gi
             limits:
               memory: 8Gi
+          files:
+            config.d/metric_log.xml: |
+              <clickhouse>
+                <metric_log remove="1"/>
+              </clickhouse>
           zookeeper:
             persistence:
               size: 5Gi
