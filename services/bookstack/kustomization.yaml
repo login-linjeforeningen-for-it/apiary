@@ -35,6 +35,6 @@ configMapGenerator:
 
 images:
   - name: lscr.io/linuxserver/bookstack
-    newTag: "26.05.4"
+    newTag: "v26.09.2-ls292"
   - name: mariadb
     newTag: "11.4"
