@@ -6,9 +6,9 @@ spec:
   ingressClassName: internal
   tls:
     - hosts:
-        - queenbee-next.login.no
+        - queenbee.login.no
   rules:
-    - host: queenbee-next.login.no
+    - host: queenbee.login.no
       http:
         paths:
           - path: /
