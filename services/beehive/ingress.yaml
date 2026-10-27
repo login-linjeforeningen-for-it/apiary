@@ -7,19 +7,8 @@ spec:
   tls:
     - hosts:
         - login.no
-        - beehive.login.no
   rules:
     - host: login.no
-      http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: beehive
-                port:
-                  number: 3000
-    - host: beehive.login.no
       http:
         paths:
           - path: /
