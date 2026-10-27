@@ -11,7 +11,7 @@ spec:
         elements:
           - lane: public
             vip: 10.30.0.40
-            proxyFrom: 10.30.0.10/32
+            proxyFrom: 10.30.0.173/32
           - lane: internal
             vip: 10.30.0.41
             proxyFrom: 10.10.0.21/32
