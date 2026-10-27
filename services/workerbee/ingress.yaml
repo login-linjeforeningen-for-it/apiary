@@ -6,9 +6,9 @@ spec:
   ingressClassName: public
   tls:
     - hosts:
-        - workerbee-next.login.no
+        - workerbee.login.no
   rules:
-    - host: workerbee-next.login.no
+    - host: workerbee.login.no
       http:
         paths:
           - path: /
