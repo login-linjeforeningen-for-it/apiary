@@ -3,9 +3,8 @@ kind: Service
 metadata:
   name: beehive
 spec:
-  type: NodePort
   selector:
     app.kubernetes.io/name: beehive
   ports:
     - port: 3000
-      nodePort: 30081
+      targetPort: http
