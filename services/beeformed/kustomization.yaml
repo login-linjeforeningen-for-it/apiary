@@ -21,9 +21,9 @@ configMapGenerator:
       - DB_HOST=beeformed-db-rw
       - DB_PORT=5432
       - AUTH_URL=https://authentik.login.no
-      - FRONTEND_URL=https://forms-next.login.no
+      - FRONTEND_URL=https://forms.login.no
       - API_URL=http://beeformed-api:8080/api
-      - NEXT_PUBLIC_API_URL=https://forms-api-next.login.no/api
+      - NEXT_PUBLIC_API_URL=https://forms-api.login.no/api
       - TRUST_PROXY=true
       - SMTP_SECURE=true
       - SMTP_FROM=noreply@login.no
@@ -31,6 +31,6 @@ configMapGenerator:
 
 images:
   - name: ghcr.io/login-linjeforeningen-for-it/beeformed/frontend
-    newTag: sha-484214a
+    newTag: sha-51f2c98
   - name: ghcr.io/login-linjeforeningen-for-it/beeformed/api
     newTag: sha-484214a

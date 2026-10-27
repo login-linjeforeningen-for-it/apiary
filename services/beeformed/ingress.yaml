@@ -6,9 +6,9 @@ spec:
   ingressClassName: public
   tls:
     - hosts:
-        - forms-next.login.no
+        - forms.login.no
   rules:
-    - host: forms-next.login.no
+    - host: forms.login.no
       http:
         paths:
           - path: /
@@ -27,9 +27,9 @@ spec:
   ingressClassName: public
   tls:
     - hosts:
-        - forms-api-next.login.no
+        - forms-api.login.no
   rules:
-    - host: forms-api-next.login.no
+    - host: forms-api.login.no
       http:
         paths:
           - path: /
