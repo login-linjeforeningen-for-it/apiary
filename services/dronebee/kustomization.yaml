@@ -41,6 +41,8 @@ configMapGenerator:
       - QUEENBEE_URL=http://localhost:3000
       - REDIRECT_URI=http://localhost:8080/api/callback
       - RUNNING_ID=apiary
+      - STYRET_MEETINGS_URL=/public/docs/minutes/styremoter/
+      - TEKKOM_MEETINGS_URL=/tekkom/meetings/
       - TEKKOM_BOT_API_URL=http://dronebee-api:8080/api
       - WIKI_URL=https://wiki.login.no
 
