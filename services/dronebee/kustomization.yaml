@@ -1,0 +1,50 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - externalsecret.yaml
+  - postgres.yaml
+  - deployment.yaml
+  - service.yaml
+  - ingress.yaml
+
+commonLabels:
+  app.kubernetes.io/part-of: login
+
+configMapGenerator:
+  - name: dronebee-env
+    literals:
+      - NODE_ENV=production
+      - TZ=Europe/Oslo
+      - PORT=8080
+      - LOG_LEVEL=info
+      - DB=tekkom_bot
+      - DB_USER=tekkom_bot
+      - DB_HOST=dronebee-db-rw
+      - DB_PORT=5432
+      - AUTHENTIK_API_URL=https://authentik.login.no
+      - DISCORD_CLIENT_ID=1143323011370450995
+      - DISCORD_GUILD_ID=284789429539700736
+      - DISCORD_MINECRAFT_LOG_CHANNEL_ID=1162108306412802210
+      - DISCORD_SAKER_TIL_STYREMOTER_CHANNEL_ID=1062469035104677958
+      - DISCORD_SERVICE_MONITORING_CHANNEL_ID=1246801546394603610
+      - DISCORD_STYRET_ROLE_ID=293403388119482369
+      - DISCORD_TEKKOM_ROLE_ID=940879337383673866
+      - DISCORD_TEKKOM_VERV_CHANNEL_ID=1032029092448575498
+      - GRAPHQL_URL=https://wiki.login.no/graphql
+      - MINECRAFT_CREATIVE=creative
+      - MINECRAFT_CREATIVE_PORT=6688
+      - MINECRAFT_PORT=6969
+      - MINECRAFT_SURVIVAL_PORT=6677
+      - MINECRAFT_SURVIVAL=survival
+      - MINECRAFT_URL=http://51.222.254.125
+      - QUEENBEE_URL=http://localhost:3000
+      - REDIRECT_URI=http://localhost:8080/api/callback
+      - TEKKOM_BOT_API_URL=http://dronebee-api:8080/api
+      - WIKI_URL=https://wiki.login.no
+
+images:
+  - name: ghcr.io/login-linjeforeningen-for-it/dronebee
+    newTag: sha-e5bda29
+  - name: ghcr.io/login-linjeforeningen-for-it/dronebee/api
+    newTag: sha-e5bda29
