@@ -6,9 +6,9 @@ spec:
   ingressClassName: public
   tls:
     - hosts:
-        - beekeeper-next.login.no
+        - beekeeper.login.no
   rules:
-    - host: beekeeper-next.login.no
+    - host: beekeeper.login.no
       http:
         paths:
           - path: /
