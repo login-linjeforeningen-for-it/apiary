@@ -45,6 +45,8 @@ configMapGenerator:
       - TEKKOM_MEETINGS_URL=/tekkom/meetings/
       - TEKKOM_BOT_API_URL=http://dronebee-api:8080/api
       - WIKI_URL=https://wiki.login.no
+      - WIKI_STYRET_TEMPLATE_ID=1046
+      - WIKI_TEKKOM_TEMPLATE_ID=1057
 
 images:
   - name: ghcr.io/login-linjeforeningen-for-it/dronebee
