@@ -1,0 +1,66 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: studentbee
+spec:
+  ingressClassName: public
+  tls:
+    - hosts:
+        - studentbee.login.no
+        - studentbee-api.login.no
+  rules:
+    - host: studentbee.login.no
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: studentbee
+                port:
+                  number: 3000
+    - host: studentbee-api.login.no
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: studentbee-api
+                port:
+                  number: 8080
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: studentbee-api-blocked
+  annotations:
+    traefik.ingress.kubernetes.io/router.middlewares: studentbee-deny@kubernetescrd
+spec:
+  ingressClassName: public
+  rules:
+    - host: studentbee-api.login.no
+      http:
+        paths:
+          - path: /api/user/time
+            pathType: Prefix
+            backend:
+              service:
+                name: studentbee-api
+                port:
+                  number: 8080
+          - path: /api/user/score
+            pathType: Prefix
+            backend:
+              service:
+                name: studentbee-api
+                port:
+                  number: 8080
+---
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: deny
+spec:
+  ipAllowList:
+    sourceRange: [127.0.0.1/32]

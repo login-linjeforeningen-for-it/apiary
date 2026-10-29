@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: studentbee
+spec:
+  selector:
+    app.kubernetes.io/name: studentbee
+  ports:
+    - port: 3000
+      targetPort: http
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: studentbee-api
+spec:
+  selector:
+    app.kubernetes.io/name: studentbee-api
+  ports:
+    - port: 8080
+      targetPort: http
