@@ -1,0 +1,24 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: s3-login-no
+spec:
+  parentRefs:
+    - name: traefik-gateway
+      namespace: traefik
+  hostnames:
+    - s3.login.no
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /beehive/
+      filters:
+        - type: RequestRedirect
+          requestRedirect:
+            scheme: https
+            hostname: tekkom-beehive.s3.de.io.cloud.ovh.net
+            path:
+              type: ReplacePrefixMatch
+              replacePrefixMatch: /
+            statusCode: 301
