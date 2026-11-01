@@ -59,6 +59,7 @@ spec:
                     from: All
                   certificateRefs:
                     - name: wildcard-login-no
+                    - name: other-domains
             accessLog:
               enabled: true
               format: json

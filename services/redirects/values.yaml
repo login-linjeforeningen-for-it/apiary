@@ -7,3 +7,4 @@ redirects:
   scrum.login.no:         https://github.com/orgs/login-linjeforeningen-for-it/projects/1
   issues.login.no:        https://github.com/orgs/login-linjeforeningen-for-it/projects/1
   buskflytter.login.no:   https://tekkom-beehive.s3.de.io.cloud.ovh.net/img/buskflytter.gif
+  logout.no:              https://login.no/pwned
