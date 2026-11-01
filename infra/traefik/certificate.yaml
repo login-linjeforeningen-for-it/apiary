@@ -11,3 +11,16 @@ spec:
   dnsNames:
     - "login.no"
     - "*.login.no"
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: other-domains
+  namespace: traefik
+spec:
+  secretName: other-domains
+  issuerRef:
+    name: letsencrypt
+    kind: ClusterIssuer
+  dnsNames:
+    - logout.no
