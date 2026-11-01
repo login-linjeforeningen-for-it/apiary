@@ -31,6 +31,6 @@ configMapGenerator:
 
 images:
   - name: ghcr.io/login-linjeforeningen-for-it/beeformed/frontend
-    newTag: sha-51f2c98
+    newTag: sha-598ae08
   - name: ghcr.io/login-linjeforeningen-for-it/beeformed/api
     newTag: sha-484214a

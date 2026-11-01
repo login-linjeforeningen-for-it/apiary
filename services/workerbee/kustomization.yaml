@@ -19,10 +19,12 @@ configMapGenerator:
       - DB_USER=workerbee
       - DB_HOST=workerbee-db-rw
       - DB_PORT=5432
-      - S3_URL=https://s3.login.no
-      - S3_REGION=us-east-1
+      - S3_URL=https://s3.de.io.cloud.ovh.net
+      - S3_REGION=de
+      - S3_BUCKET=tekkom-beehive
+      - S3_PATH_STYLE=false
       - ALLOWED_PROTECTED_REQUESTS=25
 
 images:
   - name: ghcr.io/login-linjeforeningen-for-it/workerbee
-    newTag: sha-27480a8
+    newTag: sha-e68aa9b
