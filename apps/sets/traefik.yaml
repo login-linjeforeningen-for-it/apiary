@@ -12,9 +12,11 @@ spec:
           - lane: public
             vip: 10.30.0.40
             proxyFrom: 10.30.0.173/32
+            gateway: "true"
           - lane: internal
             vip: 10.30.0.41
             proxyFrom: 10.10.0.21/32
+            gateway: "false"
   template:
     metadata:
       name: 'traefik-{{.lane}}'
@@ -25,6 +27,9 @@ spec:
         chart: traefik
         targetRevision: 41.3.0
         helm:
+          parameters:
+            - name: providers.kubernetesGateway.enabled
+              value: '{{.gateway}}'
           valuesObject:
             ingressClass:
               isDefaultClass: false
@@ -45,6 +50,15 @@ spec:
                   trustedIPs: ['{{.proxyFrom}}']
                 forwardedHeaders:
                   trustedIPs: ['{{.proxyFrom}}']
+            gateway:
+              listeners:
+                websecure:
+                  port: 8443
+                  protocol: HTTPS
+                  namespacePolicy:
+                    from: All
+                  certificateRefs:
+                    - name: wildcard-login-no
             accessLog:
               enabled: true
               format: json

@@ -1,0 +1,8 @@
+redirects:
+  status.login.no:        https://login.no/status
+  exam.login.no:          https://studentbee.login.no
+  daoud.login.no:         https://queenbee.login.no/
+  discord.login.no:       https://discord.com/invite/login-ntnu
+  github.login.no:        https://github.com/login-linjeforeningen-for-it
+  scrum.login.no:         https://github.com/orgs/login-linjeforeningen-for-it/projects/1
+  issues.login.no:        https://github.com/orgs/login-linjeforeningen-for-it/projects/1
