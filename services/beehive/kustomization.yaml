@@ -22,4 +22,4 @@ configMapGenerator:
 
 images:
   - name: ghcr.io/login-linjeforeningen-for-it/beehive
-    newTag: sha-ff9918b
+    newTag: sha-62e89a4
