@@ -26,6 +26,6 @@ configMapGenerator:
 
 images:
   - name: ghcr.io/login-linjeforeningen-for-it/studentbee/frontend
-    newTag: sha-277d0b6
+    newTag: sha-a8c20cc
   - name: ghcr.io/login-linjeforeningen-for-it/studentbee/api
-    newTag: sha-277d0b6
+    newTag: sha-a8c20cc
