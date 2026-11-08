@@ -45,6 +45,13 @@ spec:
               spec:
                 externalTrafficPolicy: Local
             ports:
+              web:
+                http:
+                  redirections:
+                    entryPoint:
+                      to: websecure
+                      scheme: https
+                      permanent: true
               websecure:
                 proxyProtocol:
                   trustedIPs: ['{{.proxyFrom}}']
