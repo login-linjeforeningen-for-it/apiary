@@ -20,6 +20,8 @@ spec:
   template:
     metadata:
       name: 'traefik-{{.lane}}'
+      annotations:
+        argocd.argoproj.io/compare-options: ServerSideDiff=true
     spec:
       project: default
       source:
