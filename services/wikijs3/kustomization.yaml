@@ -1,0 +1,24 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - postgres.yaml
+  - deployment.yaml
+  - service.yaml
+  - ingress.yaml
+
+labels:
+  - pairs:
+      app.kubernetes.io/part-of: login
+
+configMapGenerator:
+  - name: wikijs-env
+    literals:
+      - DB_HOST=wikijs3-db-rw
+      - DB_PORT=5432
+      - DB_USER=wiki
+      - DB_NAME=wiki
+
+images:
+  - name: ghcr.io/requarks/wiki
+    newTag: 3.2.0
