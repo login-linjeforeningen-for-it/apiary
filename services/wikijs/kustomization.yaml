@@ -21,4 +21,4 @@ configMapGenerator:
 
 images:
   - name: ghcr.io/requarks/wiki
-    newTag: 2.5.315
+    newTag: 2.5.317
