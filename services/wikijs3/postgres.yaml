@@ -57,8 +57,9 @@ spec:
       database: wiki
       owner: wiki
       postInitApplicationSQL:
-        - CREATE EXTENSION IF NOT EXISTS ltree
-        - CREATE EXTENSION IF NOT EXISTS pg_trgm
+        - CREATE SCHEMA IF NOT EXISTS wiki AUTHORIZATION wiki
+        - CREATE EXTENSION IF NOT EXISTS ltree SCHEMA wiki
+        - CREATE EXTENSION IF NOT EXISTS pg_trgm SCHEMA wiki
   storage:
     size: 5Gi
   resources:
