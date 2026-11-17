@@ -3,12 +3,23 @@ kind: Ingress
 metadata:
   name: wikijs
 spec:
-  ingressClassName: internal
+  ingressClassName: public
   tls:
     - hosts:
-        - wiki-next.login.no
+        - wiki.login.no
+        - wikijs.login.no
   rules:
-    - host: wiki-next.login.no
+    - host: wiki.login.no
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: wikijs
+                port:
+                  number: 3000
+    - host: wikijs.login.no
       http:
         paths:
           - path: /
