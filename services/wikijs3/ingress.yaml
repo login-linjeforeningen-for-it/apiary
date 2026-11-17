@@ -29,4 +29,4 @@ spec:
   redirectRegex:
     regex: ^(?i)https://wiki\.login\.no(?:/en)?/public/docs/minutes(?:/styrem(?:o|ø|%C3%B8)ter)?(/.*)?$
     replacement: https://wiki.login.no/styret/meetings${1}
-    permanent: false
+    permanent: true
