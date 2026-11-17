@@ -17,6 +17,16 @@ spec:
           deploymentEnvironment: prod
         otelCollectorEndpoint: http://signoz-otel-collector.signoz.svc.cluster.local:4318
         otelInsecure: true
+        otelAgent:
+          ports:
+            otlp:
+              hostPort: ""
+            otlp-http:
+              hostPort: ""
+            metrics:
+              hostPort: ""
+            health-check:
+              hostPort: ""
   destination:
     server: https://kubernetes.default.svc
     namespace: signoz

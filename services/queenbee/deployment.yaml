@@ -12,6 +12,7 @@ spec:
       labels:
         app.kubernetes.io/name: queenbee
     spec:
+      automountServiceAccountToken: false
       containers:
         - name: queenbee
           image: ghcr.io/login-linjeforeningen-for-it/queenbee

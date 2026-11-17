@@ -14,6 +14,7 @@ spec:
       labels:
         app.kubernetes.io/name: dronebee
     spec:
+      automountServiceAccountToken: false
       containers:
         - name: dronebee
           image: ghcr.io/login-linjeforeningen-for-it/dronebee
@@ -52,6 +53,7 @@ spec:
       labels:
         app.kubernetes.io/name: dronebee-api
     spec:
+      automountServiceAccountToken: false
       containers:
         - name: dronebee-api
           image: ghcr.io/login-linjeforeningen-for-it/dronebee/api

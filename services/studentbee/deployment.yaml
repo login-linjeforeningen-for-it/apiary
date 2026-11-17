@@ -12,6 +12,7 @@ spec:
       labels:
         app.kubernetes.io/name: studentbee
     spec:
+      automountServiceAccountToken: false
       containers:
         - name: studentbee
           image: ghcr.io/login-linjeforeningen-for-it/studentbee/frontend
@@ -59,6 +60,7 @@ spec:
       labels:
         app.kubernetes.io/name: studentbee-api
     spec:
+      automountServiceAccountToken: false
       containers:
         - name: studentbee-api
           image: ghcr.io/login-linjeforeningen-for-it/studentbee/api

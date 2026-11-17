@@ -12,6 +12,7 @@ spec:
       labels:
         app.kubernetes.io/name: workerbee
     spec:
+      automountServiceAccountToken: false
       containers:
         - name: workerbee
           image: ghcr.io/login-linjeforeningen-for-it/workerbee

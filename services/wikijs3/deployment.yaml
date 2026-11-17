@@ -14,6 +14,7 @@ spec:
       labels:
         app.kubernetes.io/name: wikijs
     spec:
+      automountServiceAccountToken: false
       containers:
         - name: wikijs
           image: ghcr.io/requarks/wiki

@@ -12,6 +12,7 @@ spec:
       labels:
         app.kubernetes.io/name: beeformed
     spec:
+      automountServiceAccountToken: false
       containers:
         - name: beeformed
           image: ghcr.io/login-linjeforeningen-for-it/beeformed/frontend
@@ -62,6 +63,7 @@ spec:
       labels:
         app.kubernetes.io/name: beeformed-api
     spec:
+      automountServiceAccountToken: false
       containers:
         - name: beeformed-api
           image: ghcr.io/login-linjeforeningen-for-it/beeformed/api

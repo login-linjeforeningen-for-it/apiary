@@ -51,7 +51,7 @@ metadata:
   name: workerbee-db
 spec:
   instances: 1
-  imageName: ghcr.io/cloudnative-pg/postgresql:18
+  imageName: ghcr.io/cloudnative-pg/postgresql:18-standard-trixie
   bootstrap:
     initdb:
       database: workerbee

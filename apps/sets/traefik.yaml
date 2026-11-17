@@ -55,6 +55,9 @@ spec:
                       scheme: https
                       permanent: true
               websecure:
+                http:
+                  middlewares:
+                    - 'traefik-hsts-{{.lane}}@kubernetescrd'
                 proxyProtocol:
                   trustedIPs: ['{{.proxyFrom}}']
                 forwardedHeaders:
@@ -65,13 +68,24 @@ spec:
                   port: 8443
                   protocol: HTTPS
                   namespacePolicy:
-                    from: All
+                    from: Selector
+                    selector:
+                      matchLabels:
+                        kubernetes.io/metadata.name: redirects
                   certificateRefs:
                     - name: wildcard-login-no
                     - name: other-domains
             accessLog:
               enabled: true
               format: json
+            extraObjects:
+              - apiVersion: traefik.io/v1alpha1
+                kind: Middleware
+                metadata:
+                  name: 'hsts-{{.lane}}'
+                spec:
+                  headers:
+                    stsSeconds: 31536000
             resources:
               requests:
                 cpu: 50m

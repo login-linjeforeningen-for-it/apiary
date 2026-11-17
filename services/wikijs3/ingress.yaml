@@ -30,3 +30,20 @@ spec:
     regex: ^(?i)https://wiki\.login\.no(?:/en)?/public/docs/minutes(?:/styrem(?:o|ø|%C3%B8)ter)?(/.*)?$
     replacement: https://wiki.login.no/styret/meetings${1}
     permanent: true
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: dronebee
+spec:
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/name: wikijs
+  policyTypes: [Ingress]
+  ingress:
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: dronebee
+      ports:
+        - port: http

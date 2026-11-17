@@ -12,6 +12,7 @@ spec:
       labels:
         app.kubernetes.io/name: beekeeper
     spec:
+      automountServiceAccountToken: false
       containers:
         - name: beekeeper
           image: ghcr.io/login-linjeforeningen-for-it/beekeeper/api

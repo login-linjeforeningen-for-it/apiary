@@ -12,6 +12,7 @@ spec:
       labels:
         app.kubernetes.io/name: beehive
     spec:
+      automountServiceAccountToken: false
       containers:
         - name: beehive
           image: ghcr.io/login-linjeforeningen-for-it/beehive
