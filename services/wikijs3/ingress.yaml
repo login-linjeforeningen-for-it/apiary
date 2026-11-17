@@ -7,19 +7,8 @@ spec:
   tls:
     - hosts:
         - wiki.login.no
-        - wikijs.login.no
   rules:
     - host: wiki.login.no
-      http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: wikijs
-                port:
-                  number: 3000
-    - host: wikijs.login.no
       http:
         paths:
           - path: /
