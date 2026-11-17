@@ -31,7 +31,6 @@ configMapGenerator:
       - DISCORD_STYRET_ROLE_ID=293403388119482369
       - DISCORD_TEKKOM_ROLE_ID=940879337383673866
       - DISCORD_TEKKOM_VERV_CHANNEL_ID=1032029092448575498
-      - GRAPHQL_URL=https://wiki.login.no/graphql
       - MINECRAFT_CREATIVE=creative
       - MINECRAFT_CREATIVE_PORT=6688
       - MINECRAFT_PORT=6969
@@ -44,12 +43,13 @@ configMapGenerator:
       - STYRET_MEETINGS_URL=/public/docs/minutes/styremoter/
       - TEKKOM_MEETINGS_URL=/tekkom/meetings/
       - TEKKOM_BOT_API_URL=http://dronebee-api:8080/api
-      - WIKI_URL=https://wiki.login.no
-      - WIKI_STYRET_TEMPLATE_ID=1046
-      - WIKI_TEKKOM_TEMPLATE_ID=1057
+      - WIKI_SITE_ID=72a0d3e2-ec2d-4e64-b337-90711d7c55f8
+      - WIKI_URL=http://wikijs.wikijs3.svc:3000
+      - WIKI_STYRET_TEMPLATE_ID=6df4239e-0c5f-48fd-b98b-8e0fb0de87c5
+      - WIKI_TEKKOM_TEMPLATE_ID=1b6269ca-56f1-401b-8e09-cc878b4ebca4
 
 images:
   - name: ghcr.io/login-linjeforeningen-for-it/dronebee
-    newTag: sha-e5bda29
+    newTag: sha-9e83a59
   - name: ghcr.io/login-linjeforeningen-for-it/dronebee/api
-    newTag: sha-e5bda29
+    newTag: sha-9e83a59
