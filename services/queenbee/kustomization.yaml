@@ -25,4 +25,4 @@ configMapGenerator:
 
 images:
   - name: ghcr.io/login-linjeforeningen-for-it/queenbee
-    newTag: sha-1104ee2
+    newTag: sha-ea20b5c
