@@ -29,4 +29,4 @@ images:
   - name: ghcr.io/login-linjeforeningen-for-it/studentbee/frontend
     newTag: sha-a8c20cc
   - name: ghcr.io/login-linjeforeningen-for-it/studentbee/api
-    newTag: sha-a8c20cc
+    newTag: sha-82a8c25

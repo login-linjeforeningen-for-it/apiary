@@ -21,4 +21,4 @@ configMapGenerator:
 
 images:
   - name: ghcr.io/login-linjeforeningen-for-it/beekeeper/api
-    newTag: sha-df44dae
+    newTag: sha-aad9c22
