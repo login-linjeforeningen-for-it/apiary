@@ -48,6 +48,8 @@ spec:
           ingress:
             enabled: true
             className: internal
+            annotations:
+              traefik.ingress.kubernetes.io/router.middlewares: signoz-authentik@kubernetescrd
             hosts:
               - host: signoz.login.no
                 paths:

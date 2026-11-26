@@ -3,6 +3,8 @@ kind: Ingress
 metadata:
   name: argocd-server
   namespace: argocd
+  annotations:
+    traefik.ingress.kubernetes.io/router.middlewares: argocd-authentik@kubernetescrd
 spec:
   ingressClassName: internal
   tls:
