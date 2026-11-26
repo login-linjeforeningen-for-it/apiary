@@ -28,4 +28,4 @@ configMapGenerator:
 
 images:
   - name: ghcr.io/login-linjeforeningen-for-it/workerbee
-    newTag: sha-5fe8548
+    newTag: sha-05d7634

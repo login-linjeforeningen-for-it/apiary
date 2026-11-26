@@ -51,6 +51,6 @@ configMapGenerator:
 
 images:
   - name: ghcr.io/login-linjeforeningen-for-it/dronebee
-    newTag: sha-0cc4216
+    newTag: sha-502dadb
   - name: ghcr.io/login-linjeforeningen-for-it/dronebee/api
-    newTag: sha-0cc4216
+    newTag: sha-502dadb
