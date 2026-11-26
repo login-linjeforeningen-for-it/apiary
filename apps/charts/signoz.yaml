@@ -10,7 +10,7 @@ spec:
   source:
     repoURL: https://charts.signoz.io
     chart: signoz
-    targetRevision: 0.138.0
+    targetRevision: 0.151.0
     helm:
       valuesObject:
         global:
@@ -29,7 +29,13 @@ spec:
               <clickhouse>
                 <metric_log remove="1"/>
               </clickhouse>
+          initContainers:
+            udf:
+              image:
+                tag: 3.24.4
           zookeeper:
+            image:
+              tag: 3.7.2
             persistence:
               size: 5Gi
             resources:
