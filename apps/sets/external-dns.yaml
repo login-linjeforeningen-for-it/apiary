@@ -38,7 +38,6 @@ spec:
               - '--default-targets={{.target}}'
               - --force-default-targets
               - --ovh-endpoint=ovh-ca
-              - --dry-run
             env:
               - name: OVH_APPLICATION_KEY
                 valueFrom:
