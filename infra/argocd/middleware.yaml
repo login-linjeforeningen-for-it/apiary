@@ -5,3 +5,5 @@ metadata:
 spec:
   forwardAuth:
     address: https://authentik.login.no/outpost.goauthentik.io/auth/traefik
+    trustForwardHeader: false
+    maxResponseBodySize: 4194304
